@@ -19,9 +19,9 @@ public class Practica1Git {
     public static void main(String[] args) {
         // TODO code application logic here
         double temperaturas[] = new double[7];
-        String diasSemana[] = {"lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"};
-        double suma = 0;
-        int dia;
+        String diasSemana[]={"lunes","martes","miercoles","jueves","viernes","sabado","domingo"};
+        double suma = 0,max=0,min=0;
+        int dia,posMax=0,posMin=0;
         Scanner sc = new Scanner(System.in);
         sc.useLocale(Locale.ENGLISH);
 
@@ -31,16 +31,31 @@ public class Practica1Git {
             System.out.println(diasSemana[i] + ":");
             temperaturas[i] = sc.nextDouble();
             suma = suma + temperaturas[i];
+            if (i==0){
+                min=temperaturas[0];posMin=0;
+                max=temperaturas[0];posMax=0;
+            }
+            else{
+                if (temperaturas[i]>=max){
+                    max=temperaturas[i];
+                    posMax=i;
+                }
+                if (temperaturas[i]<=min){
+                    min=temperaturas[i];
+                    posMin=i;
+                }
+            }
         }
 
         System.out.println("La temperatura media ha sido:" + suma / 7);
-
+        System.out.println("La máxima fue de "+max+" grados el "+diasSemana[posMax]);
+        System.out.println("El mínimo fue de "+min+" grados el "+diasSemana[posMin]);
         do {
             System.out.println("Anota día del que quieras saber la temperatura:");
             dia = sc.nextInt();
-        } while (dia < 1 || dia > 7);
-
-        System.out.println("La temperatura fue " + temperaturas[dia - 1]);
+        } while (dia<1 || dia>7);
+        
+        System.out.println("La temperatura fue "+ temperaturas[dia-1] );
     }
 
 }
